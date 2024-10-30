@@ -24,8 +24,12 @@ db.connect(err => {
 app.get('/2000stv', (req, res) => {
     const sql = 'SELECT * FROM 2000sTV';
     db.query(sql, (err, results) => {
-        if (err) throw err;
-        res.json(results);
+         if (err) {
+      console.error('Error fetching data:', err);
+      res.status(500).send('Error fetching data');
+      return;
+    }
+       res.json(results);
     });
 });
 
